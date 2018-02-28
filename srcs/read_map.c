@@ -29,17 +29,33 @@
 //
 //}
 
+// parse every line and write to struct t_raw
+int 		parse_line(char *line, char **arr, size_t x)
+{
+	arr = ft_strsplit(line, ' ');
+	x = ft_arrhight(arr);
+}
+
 void		read_map(char *map)
 {
 	int 	fd;
 	char 	*line;
+	char	**arr;
+	size_t	x;
+	size_t	y;
 
 	line = NULL;
+	x = 0;
+	y = 0;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		return ;
+	get_next_line(fd, &line);
+	arr = ft_strsplit(line, ' ');
+	x = ft_arrhight(arr);
 	while (get_next_line(fd, &line))
 	{
+
 
 		ft_strdel(&line);
 	}

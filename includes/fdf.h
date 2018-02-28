@@ -33,10 +33,16 @@ typedef struct 			s_coord
 	int 				col;
 }						t_coord;
 
-typedef struct 			s_gen
+typedef struct 			s_raw
 {
 	t_coord				**cor;
+	int					row;
+	int					col;
+}						t_raw;
 
+typedef struct 			s_gen
+{
+	t_raw				raw;
 }						t_gen;
 
 

@@ -34,6 +34,8 @@ typedef struct		s_lst
 }					t_lst;
 
 int					get_next_line(const int fd, char **line);
+int					ft_getnbr(char *str, int *is_valid);
+size_t				ft_arrhight(char **arr);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);

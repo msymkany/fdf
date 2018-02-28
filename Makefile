@@ -21,6 +21,8 @@ GL = -lm -lmlx -framework OpenGL -framework AppKit
 INCLUDES = includes/
 
 SRCS = fdf.c \
+        read_map.c \
+
 
 OBJ = $(SRCS:.c=.o)
 

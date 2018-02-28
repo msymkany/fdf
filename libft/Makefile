@@ -82,6 +82,9 @@ SOURCE = libft/ft_isdigit.c \
             libft/ft_lstiter.c \
             libft/ft_lstmap.c \
             libft/get_next_line.c\
+            libft/ft_getnbr.c\
+            libft/ft_arrhight.c\
+            libft/ft_del_2arr.c\
             printf/ft_printf.c\
             printf/arg_cast_conversion.c\
             printf/convert_digit.c\
