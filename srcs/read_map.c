@@ -24,35 +24,71 @@
 //	return (cor);
 //}
 //
-//t_coord		*validate_coord()
-//{
-//
-//}
-
-// parse every line and write to struct t_raw
-int 		parse_line(char *line, char **arr, size_t x)
+int			validate_coord(char *coor, t_gen *gen)
 {
-	arr = ft_strsplit(line, ' ');
-	x = ft_arrhight(arr);
+	char	**arr;
+	int 	is_val;
+	int 	num;
+	int 	res;
+
+	is_val = 0;
+	res = 1;
+	arr = ft_strsplit(coor, ',');
+	if (arr[2])
+		res = 0;
+	num = ft_getnbr(arr[0], &is_val);
+	if (!is_val)
+		res = 0;
+	else
+		//write num to struct(iterate through arr)
+//	else if (arr[1])
+//		ft_printf("color\n");
+//	else
+//	{
+//	}
+	ft_del_2arr(&arr);
+	return (res);
 }
 
-void		read_map(char *map)
+// parse every line and write to struct t_raw
+int			parse_line(char *line, t_gen *gen)
+{
+	char	**arr;
+	size_t	x;
+	size_t	j;
+	int 	res;
+
+	j = 0;
+	arr = ft_strsplit(line, ' ');
+	x = ft_arrhight(arr);
+	if (x != gen->raw->width)
+		res = 0;
+	while (j < x)
+	{
+		// validate_coord(arr[j], gen);
+		j++;
+	}
+	ft_del_2arr(&arr);
+	return (res);
+}
+
+void		read_map(char *map, t_gen *gen)
 {
 	int 	fd;
 	char 	*line;
-	char	**arr;
-	size_t	x;
-	size_t	y;
 
 	line = NULL;
-	x = 0;
-	y = 0;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		return ;
+	gen->raw = ft_memalloc(sizeof(t_raw));
 	get_next_line(fd, &line);
-	arr = ft_strsplit(line, ' ');
-	x = ft_arrhight(arr);
+//	(gen->raw->hight)++;
+	parse_line(line, gen);
+//	arr = ft_strsplit(line, ' ');
+//	ft_strdel(&line);
+//	gen->raw->width = ft_arrhight(arr);
+
 	while (get_next_line(fd, &line))
 	{
 
@@ -60,5 +96,4 @@ void		read_map(char *map)
 		ft_strdel(&line);
 	}
 
-//	return
 }

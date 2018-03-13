@@ -25,25 +25,30 @@ exit
 All the functions defined in the math library (-lm and man 3 math)
 All the functions defined in the miniLibX library. **/
 
-typedef struct 			s_coord
+typedef struct s_coord	t_coord;
+typedef struct s_raw	t_raw;
+typedef struct s_gen	t_gen;
+
+typedef struct 		s_coord
 {
-	double				x;
-	double				y;
-	double				z;
-	int 				col;
-}						t_coord;
+	double			x;
+	double			y;
+	double			z;
+	int 			col;
+}					t_coord;
 
-typedef struct 			s_raw
+typedef struct 		s_raw
 {
-	t_coord				**cor;
-	int					row;
-	int					col;
-}						t_raw;
+	t_coord			**cor;
+	size_t			hight;
+	size_t			width;
+}					t_raw;
 
-typedef struct 			s_gen
+typedef struct 		s_gen
 {
-	t_raw				raw;
-}						t_gen;
+	t_raw			*raw;
+}					t_gen;
 
 
-void	ft_usage(char *name);
+void		ft_usage(char *name);
+void		read_map(char *map, t_gen *gen);

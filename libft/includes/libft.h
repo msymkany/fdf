@@ -33,6 +33,7 @@ typedef struct		s_lst
 	struct s_lst	*next;
 }					t_lst;
 
+void				ft_del_2arr(char ***arr);
 int					get_next_line(const int fd, char **line);
 int					ft_getnbr(char *str, int *is_valid);
 size_t				ft_arrhight(char **arr);
