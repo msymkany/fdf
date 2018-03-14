@@ -39,7 +39,7 @@ typedef struct 		s_coord
 
 typedef struct 		s_raw
 {
-	t_coord			**cor;
+	t_coord			cor[100][100];
 	size_t			hight;
 	size_t			width;
 }					t_raw;
@@ -51,4 +51,4 @@ typedef struct 		s_gen
 
 
 void		ft_usage(char *name);
-void		read_map(char *map, t_gen *gen);
+int			read_map(t_gen *gen, int fd);
