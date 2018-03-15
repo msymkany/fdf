@@ -12,32 +12,31 @@
 
 #include "../includes/fdf.h"
 
-// turn gen to t_raw
-
-int			validate_coord(char *coor, t_gen *gen, size_t col)
+int			validate_coord(char *coor, t_raw *raw, size_t col)
 {
 	char	**arr;
 	int 	is_val;
 	int 	res;
 
-	ft_printf("%s ", coor);//test
 	is_val = 0;
 	res = 0;
 	arr = ft_strsplit(coor, ',');
-	res = (arr[2]) ? 1 : res;
-	gen->raw->cor[gen->raw->hight][col].z = ft_getnbr(arr[0], &is_val);
-	res = (!is_val) ? 1 : res;
-	gen->raw->cor[gen->raw->hight][col].y = gen->raw->hight;
-	gen->raw->cor[gen->raw->hight][col].x = col;
-	gen->raw->cor[gen->raw->hight][col].col = 0;
+	res = ((arr[1] && arr[2]) ? 1 : res);
+	raw->cor[raw->hight][col].z = ft_getnbr(arr[0], &is_val);
+	res = ((!is_val) ? 1 : res);
+	raw->cor[raw->hight][col].y = (int)raw->hight;
+	raw->cor[raw->hight][col].x = (int)col;
+	raw->cor[raw->hight][col].col = 0;
 	if (arr[1])
-		gen->raw->cor[gen->raw->hight][col].col = 1;
+	{
+		raw->cor[raw->hight][col].col = 1;
+	}
 	ft_del_2arr(&arr);
-	ft_printf("%d ", gen->raw->cor[gen->raw->hight][col].z); // test
+	ft_printf("%d ", raw->cor[raw->hight][col].z); // test
 	return (res);
 }
 
-int			parse_line(char *line, t_gen *gen)
+int			parse_line(char *line, t_raw *raw)
 {
 	char	**arr;
 	size_t	x;
@@ -48,15 +47,14 @@ int			parse_line(char *line, t_gen *gen)
 	res = 0;
 	arr = ft_strsplit(line, ' ');
 	x = ft_arrhight(arr);
-//	ft_printf("%d\n", x);//test
-	if (x != gen->raw->width)
+	if (x != raw->width)
 		res = 1;
 	while (j < x)
 	{
-		if (validate_coord(arr[j], gen, j))
+		if (validate_coord(arr[j], raw, j))
 		{
 			ft_del_2arr(&arr);
-			return (res);
+			return (1);
 		}
 		j++;
 	}
@@ -64,30 +62,31 @@ int			parse_line(char *line, t_gen *gen)
 	return (res);
 }
 
-int		read_map(t_gen *gen, int fd)
+int		read_map(t_raw *raw, int fd)
 {
 	char 	*line;
 
 	line = NULL;
-	gen->raw = ft_memalloc(sizeof(t_raw));
-	get_next_line(fd, &line);
-	gen->raw->width = (size_t)ft_w_c(line, ' ');
-	ft_printf("%d\n", gen->raw->width);//test
-	if (parse_line(line, gen))
+	if (!get_next_line(fd, &line))
+		return (1);
+	raw->width = (size_t)ft_w_c(line, ' ');
+	ft_printf("%d\n", raw->width);//test
+	if (parse_line(line, raw))
 	{
 		ft_strdel(&line);
 		return (1);
 	}
+	ft_printf("\n"); //test
 	while (get_next_line(fd, &line))
 	{
-		(gen->raw->hight)++;
-		if (parse_line(line, gen))
+		(raw->hight)++;
+		if (parse_line(line, raw))
 		{
 			ft_strdel(&line);
 			return (1);
 		}
 		ft_printf("\n"); //test
 	}
-	(gen->raw->hight)++;
+	(raw->hight)++;
 	return (0);
 }

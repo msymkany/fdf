@@ -54,10 +54,10 @@ static long int		atoi_s(const char *str)
 	return ((r * s));
 }
 
-/**
-** is_valid is 1 by default, changes to 0 if number is not valid
-** ft_getnbr returns converted int
-**/
+/*
+**	is_valid is 1 by default, changes to 0 if number is not valid
+**	ft_getnbr returns converted int
+*/
 
 int					ft_getnbr(char *str, int *is_valid)
 {
