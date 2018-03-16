@@ -40,24 +40,21 @@ t_gen		*validate_map(int ar, char **av, t_gen *gen)
 
 int		main(int ar, char **av)
 {
-//	void	*pt;
-//	void	*wnd;
 	t_gen	*gen;
 
 	gen = NULL;
 	gen = validate_map(ar, av, gen);
 	if (gen == NULL)
 	{
-		ft_printf("Error\n");
+		ft_printf("Error\n"); //test
 		return (1);
 	}
-//	ft_printf("%d\n", gen->raw->hight);//test
-//	ft_printf("%d\n", gen->raw->width);//test
-
-
-//	pt = mlx_init();
-//	wnd = mlx_new_window(pt, 500, 500, "fdf");
-//	mlx_loop(pt);
+	gen->init = mlx_init();
+	gen->wnd = mlx_new_window(gen->init, 500, 500, "fdf");
+	while (mlx_loop(gen->init))
+	{
+		;
+	}
 	return (0);
 
 }

@@ -58,6 +58,7 @@ int			parse_line(char *line, t_raw *raw)
 		}
 		j++;
 	}
+//	raw->cor[raw->hight][j] = NULL;
 	ft_del_2arr(&arr);
 	return (res);
 }
@@ -88,5 +89,6 @@ int		read_map(t_raw *raw, int fd)
 		ft_printf("\n"); //test
 	}
 	(raw->hight)++;
+//	raw->cor[raw->hight][0] = NULL;
 	return (0);
 }

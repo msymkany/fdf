@@ -10,12 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/includes/libft.h"
-#include "../libft/includes/libftprintf.h"
-#include <mlx.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
+#ifndef FDF_H
+# define FDF_H
+
+# include "../libft/includes/libft.h"
+# include "../libft/includes/libftprintf.h"
+# include <mlx.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+#include <ncurses.h>
+
+#define MAXMAP 100
 
 /*
 ** open, read, write, close
@@ -40,7 +46,7 @@ typedef struct 		s_coord
 
 typedef struct 		s_raw
 {
-	t_coord			cor[100][100];
+	t_coord			cor[MAXMAP][MAXMAP];
 	size_t			hight;
 	size_t			width;
 }					t_raw;
@@ -48,8 +54,12 @@ typedef struct 		s_raw
 typedef struct 		s_gen
 {
 	t_raw			*raw;
+	void			*init;
+	void			*wnd;
 }					t_gen;
 
 
 void		ft_usage(char *name);
 int			read_map(t_raw *raw, int fd);
+
+#endif
