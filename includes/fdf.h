@@ -19,9 +19,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-#include <ncurses.h>
+//#include <ncurses.h>
 
 #define MAXMAP 100
+#define WINHIGHT 1000
+#define WINLEN 1000
 
 /*
 ** open, read, write, close
@@ -54,12 +56,14 @@ typedef struct 		s_raw
 typedef struct 		s_gen
 {
 	t_raw			*raw;
-	void			*init;
+	void			*ptr;
 	void			*wnd;
+	int 			not_over;
 }					t_gen;
 
 
 void		ft_usage(char *name);
 int			read_map(t_raw *raw, int fd);
+int 	key_hook(int key_code, t_gen *gen);
 
 #endif

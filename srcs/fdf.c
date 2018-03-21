@@ -49,12 +49,19 @@ int		main(int ar, char **av)
 		ft_printf("Error\n"); //test
 		return (1);
 	}
-	gen->init = mlx_init();
-	gen->wnd = mlx_new_window(gen->init, 500, 500, "fdf");
-	while (mlx_loop(gen->init))
-	{
-		;
-	}
+	gen->not_over = 1;
+	gen->ptr = mlx_init();
+	gen->wnd = mlx_new_window(gen->ptr, WINLEN, WINHIGHT, "fdf");
+	mlx_string_put(gen->ptr, gen->wnd, 1, 1, 16777215, "Hello");
+	mlx_key_hook(gen->wnd, key_hook, gen);
+	mlx_loop(gen->ptr);
+	//test
+//	while (gen->not_over)
+//	{
+//		mlx_string_put(gen->ptr, gen->wnd, 1, 1, 16777215, "Hello");
+//		mlx_loop(gen->ptr);
+//		mlx_pixel_put(gen->ptr, gen->wnd, 1, 1, 16711935);
+//		mlx_key_hook(gen->wnd, key_hook, gen);
+//	}
 	return (0);
-
 }

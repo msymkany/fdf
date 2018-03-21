@@ -23,7 +23,7 @@ INCLUDES = includes/
 SRCS = fdf.c \
         read_map.c \
         ft_usage.c \
-
+        mlx_functions.c \
 
 OBJ = $(SRCS:.c=.o)
 
