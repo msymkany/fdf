@@ -51,8 +51,9 @@ int		main(int ar, char **av)
 	}
 	gen->not_over = 1;
 	gen->ptr = mlx_init();
-	gen->wnd = mlx_new_window(gen->ptr, WINLEN, WINHIGHT, "fdf");
-	mlx_string_put(gen->ptr, gen->wnd, 1, 1, 16777215, "Hello");
+	gen->wnd = mlx_new_window(gen->ptr, WINW, WINH, "fdf");
+	gen->img = mlx_new_image(gen->ptr, WINW, WINH);
+	mlx_string_put(gen->ptr, gen->wnd, 1, 1, 16777215, "Hello"); //test
 	mlx_key_hook(gen->wnd, key_hook, gen);
 	mlx_loop(gen->ptr);
 	//test

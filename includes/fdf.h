@@ -22,8 +22,8 @@
 //#include <ncurses.h>
 
 #define MAXMAP 100
-#define WINHIGHT 1000
-#define WINLEN 1000
+#define WINH 1000
+#define WINW 1000
 
 /*
 ** open, read, write, close
@@ -58,6 +58,11 @@ typedef struct 		s_gen
 	t_raw			*raw;
 	void			*ptr;
 	void			*wnd;
+	void			*img;
+	int 			bpp;
+	int 			len;
+	int 			endn;
+	char			*img_str;
 	int 			not_over;
 }					t_gen;
 
