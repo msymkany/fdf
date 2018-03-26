@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-void		draw_pixel(t_gen *gen, int x, int y, int color)
+void		put_pixel_to_image(t_gen *gen, int x, int y, int color)
 {
 	unsigned int	c;
 	int 			j;
@@ -33,12 +33,12 @@ void	draw_image(t_gen *gen)
 	gen->endn = 0;
 	j = 0;
 	gen->img_str = mlx_get_data_addr(gen->img, &gen->bpp, &gen->len, &gen->endn);
-	ft_printf("bpp: %d\n", gen->bpp);
-	ft_printf("len: %d\n", gen->len);
-	ft_printf("end: %d\n", gen->endn);
+	ft_printf("bpp: %d\n", gen->bpp); //test
+	ft_printf("len: %d\n", gen->len); //test
+	ft_printf("end: %d\n", gen->endn); //test
 	while (j < WINW)
 	{
-		draw_pixel(gen, j, 3, 0XFFFFFF);
+		put_pixel_to_image(gen, j, 3, 0XFFFFFF);
 		j++;
 	}
 	mlx_put_image_to_window(gen->ptr, gen->wnd, gen->img, 0, 4);
@@ -48,13 +48,13 @@ int 	key_hook(int key_code, t_gen *gen)
 {
 	ft_printf("key hook\n");
 //	key_code = ft_atoi(read)
-	if (key_code == 53 || key_code == 49)
+	if (key_code == 53) //|| key_code == 49)
 	{
 //		mlx_string_put(gen->ptr, gen->wnd, 10, 10, 0X00FFFFFF, "Fuck off");
 //		sleep(10);
 		exit(0);
 	}
-	else if (key_code == 0X24)
+	else if (key_code == 36)
 	{
 		draw_image(gen);
 	}

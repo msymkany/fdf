@@ -34,6 +34,7 @@
 ** All the functions defined in the miniLibX library.
 */
 
+typedef double	t_vector __attribute__((vector_size(sizeof(double)*3)));
 typedef struct s_coord	t_coord;
 typedef struct s_raw	t_raw;
 typedef struct s_gen	t_gen;
@@ -69,6 +70,6 @@ typedef struct 		s_gen
 
 void		ft_usage(char *name);
 int			read_map(t_raw *raw, int fd);
-int 	key_hook(int key_code, t_gen *gen);
+int 		key_hook(int key_code, t_gen *gen);
 
 #endif
