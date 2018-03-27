@@ -19,7 +19,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-//#include <ncurses.h>
+#include <stdio.h> //test
+#include <math.h>
 
 #define MAXMAP 100
 #define WINH 1000
@@ -36,14 +37,22 @@
 
 typedef double	t_vector __attribute__((vector_size(sizeof(double)*3)));
 typedef struct s_coord	t_coord;
+typedef struct s_cor	t_cor;
 typedef struct s_raw	t_raw;
 typedef struct s_gen	t_gen;
 
+typedef struct 		s_cor
+{
+	double			x;
+	double			y;
+	int 			col;
+}					t_cor;
+
 typedef struct 		s_coord
 {
-	int				x;
-	int				y;
-	int				z;
+	double			x;
+	double			y;
+	double			z;
 	int 			col;
 }					t_coord;
 
