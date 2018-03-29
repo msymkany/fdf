@@ -23,8 +23,8 @@
 #include <math.h>
 
 #define MAXMAP 100
-#define WINH 1000
-#define WINW 1000
+#define WINH 100
+#define WINW 100
 
 /*
 ** open, read, write, close
@@ -66,6 +66,8 @@ typedef struct 		s_raw
 typedef struct 		s_gen
 {
 	t_raw			*raw;
+    t_cor           c0;
+    t_cor           c1;
 	void			*ptr;
 	void			*wnd;
 	void			*img;
@@ -80,5 +82,7 @@ typedef struct 		s_gen
 void		ft_usage(char *name);
 int			read_map(t_raw *raw, int fd);
 int 		key_hook(int key_code, t_gen *gen);
+void	    draw_it_all(t_gen *gen);
+void		put_pixel_to_image(t_gen *gen, int x, int y, int color);
 
 #endif
