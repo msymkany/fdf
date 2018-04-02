@@ -42,7 +42,7 @@ void	draw_image(t_gen *gen)
 //		put_pixel_to_image(gen, j, 3, 0XFFFFFF);
 //		j++;
 //	}
-//	mlx_put_image_to_window(gen->ptr, gen->wnd, gen->img, 0, 4);
+	mlx_put_image_to_window(gen->ptr, gen->wnd, gen->img, 0, 0);
 }
 
 int 	key_hook(int key_code, t_gen *gen)

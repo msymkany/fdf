@@ -35,8 +35,9 @@ void    draw_1(t_gen *gen, int dx, int dy, int sx, int sy)
         }
         else
             d += d1;
-        put_pixel_to_image(gen, x, y, gen->c0.col);
-//            putpixel(x, y, color);
+//        put_pixel_to_image(gen, x, y, gen->c0.col);
+        if (x > 0 && y > 0)
+            put_pixel_to_image(gen, x, y, 0XFFFFFF);
     }
 }
 
@@ -55,13 +56,14 @@ void    draw_2(t_gen *gen, int dx, int dy, int sx, int sy)
         }
         else
             d += d1;
-        put_pixel_to_image(gen, x, y, gen->c0.col);
+//        put_pixel_to_image(gen, x, y, gen->c0.col);
+        if (x > 0 && y > 0)
+            put_pixel_to_image(gen, x, y, 0XFFFFFF);
     }
 }
 
 void	bresenham(t_gen *gen)
 {
-//void segment(int x0, int y0, int x1, int y1, int color)
     int     dx;
     int     dy;
     int     sx;
@@ -88,10 +90,10 @@ void	draw_it_all(t_gen *gen)
 	size_t	    i;
 
 	i = 0;
-	j = 0;
 	while (i < gen->raw->hight)
 	{
-		while (j < gen->raw->width)
+        j = 0;
+        while (j < gen->raw->width)
 		{
 			gen->c0 = to_izo(gen->raw->cor[i][j], gen->c0);
 			if (j + 1 < gen->raw->width)
@@ -104,6 +106,7 @@ void	draw_it_all(t_gen *gen)
 				gen->c1 = to_izo(gen->raw->cor[i + 1][j], gen->c1);
 				bresenham(gen); // 1 for right step, 2 for down
 			}
+            j++;
 		}
 		i++;
 	}

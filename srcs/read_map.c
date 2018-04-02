@@ -22,10 +22,10 @@ int			validate_coord(char *coor, t_raw *raw, size_t col, int step)
 	res = 0;
 	arr = ft_strsplit(coor, ',');
 	res = ((arr[1] && arr[2]) ? 1 : res);
-	raw->cor[raw->hight][col].z = (ft_getnbr(arr[0], &is_val)) * step; // maybe not z, first row problem
+	raw->cor[raw->hight][col].z = (ft_getnbr(arr[0], &is_val)) * step / 2; // maybe not z, first row problem
 	res = ((!is_val) ? 1 : res);
-	raw->cor[raw->hight][col].y = (int)raw->hight * step + WINH / 20;
-	raw->cor[raw->hight][col].x = (int)col * step + WINW / 20;
+	raw->cor[raw->hight][col].y = (int)raw->hight * step;// + WINH / 20;
+	raw->cor[raw->hight][col].x = (int)col * step;// + WINW / 20;
 	raw->cor[raw->hight][col].col = 0;
 	if (arr[1])
 	{
@@ -35,6 +35,9 @@ int			validate_coord(char *coor, t_raw *raw, size_t col, int step)
 	printf("%.0f ", raw->cor[raw->hight][col].z); // test
 	return (res);
 }
+
+//+ WINH2 - (int)raw->hight / 2)
+//  + WINW2 - (int)raw->width / 2)
 
 int			parse_line(char *line, t_raw *raw, int step)
 {

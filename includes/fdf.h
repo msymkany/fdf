@@ -19,12 +19,17 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-#include <stdio.h> //test
-#include <math.h>
+# include <stdio.h> //test
+# include <math.h>
 
-#define MAXMAP 100
-#define WINH 100
-#define WINW 100
+# define MAXMAP 100
+# define WINH 1000
+# define WINW 1000
+# define WINH2 (WINH / 2)
+# define WINW2 (WINW / 2)
+//# define IMGH ()
+//# define IMGW (WINW / 2)
+
 
 /*
 ** open, read, write, close
