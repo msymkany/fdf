@@ -22,7 +22,7 @@
 # include <stdio.h> //test
 # include <math.h>
 
-# define MAXMAP 100
+# define MAXMAP 1000
 # define WINH 1000
 # define WINW 1000
 # define WINH2 (WINH / 2)
@@ -78,7 +78,7 @@ typedef struct 		s_gen
 	void			*img;
 	int 			bpp;
 	int 			len;
-	int 			endn;
+	int 			en;
 	char			*img_str;
 	int 			not_over;
 }					t_gen;
@@ -87,6 +87,7 @@ typedef struct 		s_gen
 void		ft_usage(char *name);
 int			read_map(t_raw *raw, int fd);
 int 		key_hook(int key_code, t_gen *gen);
+int         to_exit_x(t_gen *gen);
 void	    draw_it_all(t_gen *gen);
 void		put_pixel_to_image(t_gen *gen, int x, int y, int color);
 

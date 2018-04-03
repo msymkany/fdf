@@ -12,6 +12,16 @@
 
 #include "../includes/fdf.h"
 
+int     to_exit_x(t_gen *gen)
+{
+    free(gen->raw);
+    free(gen);
+    gen = NULL;
+    system("leaks fdf");
+    exit(1);
+    return (0);
+}
+
 void		put_pixel_to_image(t_gen *gen, int x, int y, int color)
 {
 	unsigned int	c;
@@ -30,12 +40,12 @@ void	draw_image(t_gen *gen)
 
 	gen->bpp = 0;
 	gen->len = 0;
-	gen->endn = 0;
+	gen->en = 0;
 	j = 0;
-	gen->img_str = mlx_get_data_addr(gen->img, &gen->bpp, &gen->len, &gen->endn);
+	gen->img_str = mlx_get_data_addr(gen->img, &gen->bpp, &gen->len, &gen->en);
 	ft_printf("bpp: %d\n", gen->bpp); //test
 	ft_printf("len: %d\n", gen->len); //test
-	ft_printf("end: %d\n", gen->endn); //test
+	ft_printf("end: %d\n", gen->en); //test
     draw_it_all(gen);
 //	while (j < WINW)
 //	{
@@ -53,6 +63,7 @@ int 	key_hook(int key_code, t_gen *gen)
 	{
 //		mlx_string_put(gen->ptr, gen->wnd, 10, 10, 0X00FFFFFF, "Fuck off");
 //		sleep(10);
+        system("leaks fdf");
 		exit(0);
 	}
 	else if (key_code == 36)

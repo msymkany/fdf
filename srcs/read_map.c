@@ -83,6 +83,7 @@ int		read_map(t_raw *raw, int fd)
 		ft_strdel(&line);
 		return (1);
 	}
+    ft_strdel(&line);
 	printf("\n"); //test
 	while (get_next_line(fd, &line))
 	{
@@ -92,6 +93,7 @@ int		read_map(t_raw *raw, int fd)
 			ft_strdel(&line);
 			return (1);
 		}
+        ft_strdel(&line);
 		printf("\n"); //test
 	}
 	(raw->hight)++;

@@ -55,6 +55,7 @@ int		main(int ar, char **av)
 	gen->img = mlx_new_image(gen->ptr, WINW, WINH);
 	mlx_string_put(gen->ptr, gen->wnd, 1, 1, 16777215, "Hello"); //test
 	mlx_key_hook(gen->wnd, key_hook, gen);
+    mlx_hook(gen->wnd, 17, 1L << 17, to_exit_x, gen);
 	mlx_loop(gen->ptr);
 	//test
 //	while (gen->not_over)
