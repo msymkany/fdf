@@ -14,9 +14,7 @@
 
 int     to_exit_x(t_gen *gen)
 {
-    free(gen->raw);
-    free(gen);
-    gen = NULL;
+    ft_strdel(&gen->img_str);
     system("leaks fdf");
     exit(1);
     return (0);
@@ -47,22 +45,17 @@ void	draw_image(t_gen *gen)
 	ft_printf("len: %d\n", gen->len); //test
 	ft_printf("end: %d\n", gen->en); //test
     draw_it_all(gen);
-//	while (j < WINW)
-//	{
-//		put_pixel_to_image(gen, j, 3, 0XFFFFFF);
-//		j++;
-//	}
 	mlx_put_image_to_window(gen->ptr, gen->wnd, gen->img, 0, 0);
 }
 
 int 	key_hook(int key_code, t_gen *gen)
 {
-	ft_printf("key hook\n");
-//	key_code = ft_atoi(read)
-	if (key_code == 53) //|| key_code == 49)
+	ft_printf("key hook\n"); //test
+	if (key_code == 53)
 	{
 //		mlx_string_put(gen->ptr, gen->wnd, 10, 10, 0X00FFFFFF, "Fuck off");
 //		sleep(10);
+        ft_strdel(&gen->img_str);
         system("leaks fdf");
 		exit(0);
 	}

@@ -25,8 +25,7 @@
 # define MAXMAP 1000
 # define WINH 1000
 # define WINW 1000
-# define WINH2 (WINH / 2)
-# define WINW2 (WINW / 2)
+# define IMGW (WINW - WINW / 10)
 //# define IMGH ()
 //# define IMGW (WINW / 2)
 
@@ -45,6 +44,18 @@ typedef struct s_coord	t_coord;
 typedef struct s_cor	t_cor;
 typedef struct s_raw	t_raw;
 typedef struct s_gen	t_gen;
+typedef struct s_bres	t_bres;
+
+typedef struct 		s_bres
+{
+	int				dx;
+	int				dy;
+	int				sx;
+	int				sy;
+	int				d;
+	int				d1;
+	int				d2;
+}					t_bres;
 
 typedef struct 		s_cor
 {
@@ -80,7 +91,6 @@ typedef struct 		s_gen
 	int 			len;
 	int 			en;
 	char			*img_str;
-	int 			not_over;
 }					t_gen;
 
 

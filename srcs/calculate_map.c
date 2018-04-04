@@ -14,74 +14,86 @@
 
 t_cor 	to_izo(t_coord cor, t_cor st)
 {
-	st.x = (cor.x - cor.z) / sqrt(2);
+	st.x = (cor.x - cor.z)/ sqrt(2);
 	st.y = (cor.x + cor.z + cor.y * 2) / sqrt(6);
 	st.col = cor.col;
-    return (st);
+	return (st);
 }
 
-void    draw_1(t_gen *gen, int dx, int dy, int sx, int sy)
+void    draw_1(t_gen *gen, t_bres br)
 {
-    int d = (dy << 1) - dx;
-    int d1 = dy << 1;
-    int d2 = (dy - dx) << 1;
+	int i;
+	int		x;
+	int		y;
 
-    for(int x = gen->c0.x + sx, y = gen->c0.y, i = 1; i <= dx; i++, x += sx)
-    {
-        if (d > 0)
-        {
-            d += d2;
-            y += sy;
-        }
-        else
-            d += d1;
-//        put_pixel_to_image(gen, x, y, gen->c0.col);
-        if (x > 0 && y > 0)
-            put_pixel_to_image(gen, x, y, 0XFFFFFF);
-    }
+	i = 1;
+	br.d = (br.dy << 1) - br.dx;
+	br.d1 = br.dy << 1;
+	br.d2 = (br.dy - br.dx) << 1;
+	x = gen->c0.x + br.sx;
+	y = gen->c0.y;
+	while (i <= br.dx)
+	{
+		if (br.d > 0)
+		{
+			br.d += br.d2;
+			y += br.sy;
+		}
+		else
+			br.d += br.d1;
+		if (x >= 0 && y >= 0)
+			put_pixel_to_image(gen, x, y, gen->c0.col);
+		i++;
+		x += br.sx;
+	}
 }
 
-void    draw_2(t_gen *gen, int dx, int dy, int sx, int sy)
+void    draw_2(t_gen *gen, t_bres br)
 {
-    int d = (dx << 1) - dy;
-    int d1 = dx << 1;
-    int d2 = (dx - dy) << 1;
-    put_pixel_to_image(gen, gen->c0.x, gen->c0.y, gen->c0.col);
-    for(int y = gen->c0.y + sy, x = gen->c0.x, i = 1; i <= dy; i++, y += sy)
-    {
-        if ( d >0)
-        {
-            d += d2;
-            x += sx;
-        }
-        else
-            d += d1;
-//        put_pixel_to_image(gen, x, y, gen->c0.col);
-        if (x > 0 && y > 0)
-            put_pixel_to_image(gen, x, y, 0XFFFFFF);
-    }
+	int		i;
+	int		x;
+	int		y;
+
+	i = 1;
+	br.d = (br.dx << 1) - br.dy;
+	br.d1 = br.dx << 1;
+	br.d2 = (br.dx - br.dy) << 1;
+	y = gen->c0.y + br.sy;
+	x = gen->c0.x;
+	while (i <= br.dy)
+	{
+		if (br.d > 0)
+		{
+			br.d += br.d2;
+			x += br.sx;
+		}
+		else
+			br.d += br.d1;
+		if (x >= 0 && y >= 0)
+			put_pixel_to_image(gen, x, y, gen->c0.col);
+		i++;
+		y += br.sy;
+	}
 }
 
 void	bresenham(t_gen *gen)
 {
-    int     dx;
-    int     dy;
-    int     sx;
-    int     sy;
+	t_bres		br;
 
-    dx = fabs(gen->c1.x - gen->c0.x);
-    dy = fabs(gen->c1.y - gen->c0.y);
-    sx = gen->c1.x >= gen->c0.x ? 1 : -1;
-    sy = gen->c1.y >= gen->c0.y ? 1 : -1;
-    put_pixel_to_image(gen, gen->c0.x, gen->c0.y, gen->c0.col);
-    if (dy <= dx)
-    {
-        draw_1(gen, dx, dy, sx, sy);
-    }
-    else
-    {
-        draw_2(gen, dx, dy, sx, sy);
-    }
+	br.dx = fabs(gen->c1.x - gen->c0.x);
+	br.dy = fabs(gen->c1.y - gen->c0.y);
+	br.sx = gen->c1.x >= gen->c0.x ? 1 : -1;
+	br.sy = gen->c1.y >= gen->c0.y ? 1 : -1;
+	if (gen->c0.x >= 0 && gen->c0.y >= 0)
+		put_pixel_to_image(gen, gen->c0.x, gen->c0.y, gen->c0.col);
+	if (br.dy <= br.dx)
+	{
+		draw_1(gen, br);
+	}
+	else
+	{
+		draw_2(gen, br);
+	}
 }
 
 void	draw_it_all(t_gen *gen)
@@ -92,21 +104,21 @@ void	draw_it_all(t_gen *gen)
 	i = 0;
 	while (i < gen->raw->hight)
 	{
-        j = 0;
-        while (j < gen->raw->width)
+		j = 0;
+		while (j < gen->raw->width)
 		{
 			gen->c0 = to_izo(gen->raw->cor[i][j], gen->c0);
 			if (j + 1 < gen->raw->width)
 			{
 				gen->c1 = to_izo(gen->raw->cor[i][j + 1], gen->c1);
-				bresenham(gen); // 1 for right step, 2 for down
+				bresenham(gen);
 			}
 			if (i + 1 < gen->raw->hight)
 			{
 				gen->c1 = to_izo(gen->raw->cor[i + 1][j], gen->c1);
-				bresenham(gen); // 1 for right step, 2 for down
+				bresenham(gen);
 			}
-            j++;
+			j++;
 		}
 		i++;
 	}
