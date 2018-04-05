@@ -20,8 +20,8 @@ void	center_it(t_raw *raw)
 	double		y;
 
 	i = 0;
-	x = raw->cor[raw->hight / 2][raw->width / 2].x;
-	y = raw->cor[raw->hight / 2][raw->width / 2].y;
+	x = raw->cor[raw->hight - 1][raw->width - 1].x / 2;
+	y = raw->cor[raw->hight - 1][raw->width - 1].y / 2;
 	while (i < raw->hight)
 	{
 		j = 0;
