@@ -12,9 +12,32 @@
 
 #include "../includes/fdf.h"
 
-t_gen		*validate_map(int ar, char **av, t_gen *gen)
+void	center_it(t_raw *raw)
 {
-	int 	fd;
+	size_t		i;
+	size_t		j;
+	double		x;
+	double		y;
+
+	i = 0;
+	x = raw->cor[raw->hight / 2][raw->width / 2].x;
+	y = raw->cor[raw->hight / 2][raw->width / 2].y;
+	while (i < raw->hight)
+	{
+		j = 0;
+		while (j < raw->width)
+		{
+			raw->cor[i][j].y = raw->cor[i][j].y - y + WINH / 2;// + MARG / 2;
+			raw->cor[i][j].x = raw->cor[i][j].x - x + WINW / 2;// + MARG / 2;
+			j++;
+		}
+		i++;
+	}
+}
+
+t_gen	*validate_map(int ar, char **av, t_gen *gen)
+{
+	int		fd;
 
 	if (ar < 2)
 	{
@@ -28,6 +51,7 @@ t_gen		*validate_map(int ar, char **av, t_gen *gen)
 	}
 	gen = ft_memalloc(sizeof(t_gen));
 	gen->raw = ft_memalloc(sizeof(t_raw));
+	gen->raw->clr = (ar > 3 && ft_strequ(av[2], "-c")) ? get_col(av[3]) : DCOL;
 	if (read_map(gen->raw, fd))
 	{
 		free(gen);
@@ -35,8 +59,9 @@ t_gen		*validate_map(int ar, char **av, t_gen *gen)
 		ft_printf("Error: invalid map\n");
 		return (gen);
 	}
-    (gen->raw->hight)++;
-    return (gen);
+	(gen->raw->hight)++;
+	center_it(gen->raw);
+	return (gen);
 }
 
 int		main(int ar, char **av)
@@ -50,14 +75,14 @@ int		main(int ar, char **av)
 		ft_printf("Error\n"); //test
 		return (1);
 	}
-//	gen->ptr = mlx_init();
-//	gen->wnd = mlx_new_window(gen->ptr, WINW, WINH, "fdf");
-//	gen->img = mlx_new_image(gen->ptr, WINW, WINH);
-//	mlx_string_put(gen->ptr, gen->wnd, 1, 1, 16777215, "Hello"); //test
-//	mlx_key_hook(gen->wnd, key_hook, gen);
-//    mlx_hook(gen->wnd, 17, 1L << 17, to_exit_x, gen);
-//	mlx_loop(gen->ptr);
-
-
+	printf("gen->raw->clr %X ", gen->raw->clr); //test
+	printf("marg %d ", MARG); //test
+	gen->ptr = mlx_init();
+	gen->wnd = mlx_new_window(gen->ptr, WINW, WINH, "fdf");
+	gen->img = mlx_new_image(gen->ptr, WINW, WINH);
+	mlx_string_put(gen->ptr, gen->wnd, 1, 1, 16777215, "Hello"); //test
+	mlx_key_hook(gen->wnd, key_hook, gen);
+	mlx_hook(gen->wnd, 17, 1L << 17, to_exit_x, gen);
+	mlx_loop(gen->ptr);
 	return (0);
 }

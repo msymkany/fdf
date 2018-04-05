@@ -27,9 +27,9 @@ void		put_pixel_to_image(t_gen *gen, int x, int y, int color)
 
 	c = mlx_get_color_value(gen->ptr, color);
 	j = y * gen->len + x * gen->bpp / 8;
-	gen->img_str[j] = (c & 0xFF0000) >> 16;
+	gen->img_str[j] = (c & 0xFF);
 	gen->img_str[++j] = (c & 0xFF00) >> 8;
-	gen->img_str[++j] = (c & 0xFF);
+	gen->img_str[++j] = (c & 0xFF0000) >> 16;
 }
 
 void	draw_image(t_gen *gen)

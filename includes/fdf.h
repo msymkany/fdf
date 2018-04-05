@@ -25,10 +25,10 @@
 # define MAXMAP 1000
 # define WINH 1000
 # define WINW 1000
-# define IMGW (WINW - WINW / 10)
-//# define IMGH ()
-//# define IMGW (WINW / 2)
-
+# define MARG (WINW / 5)
+# define IMGW (WINW - MARG)
+# define DCOL 0XE3BEF7//0XFFFFFF
+# define DCOL2 0X7bb1f7 // cool red ED2323
 
 /*
 ** open, read, write, close
@@ -77,6 +77,7 @@ typedef struct 		s_raw
 	t_coord			cor[MAXMAP][MAXMAP];
 	size_t			hight;
 	size_t			width;
+	int 			clr;
 }					t_raw;
 
 typedef struct 		s_gen
@@ -87,14 +88,15 @@ typedef struct 		s_gen
 	void			*ptr;
 	void			*wnd;
 	void			*img;
+	char			*img_str;
 	int 			bpp;
 	int 			len;
 	int 			en;
-	char			*img_str;
 }					t_gen;
 
 
 void		ft_usage(char *name);
+int 		get_col(char *str);
 int			read_map(t_raw *raw, int fd);
 int 		key_hook(int key_code, t_gen *gen);
 int         to_exit_x(t_gen *gen);

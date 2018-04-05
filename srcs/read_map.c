@@ -20,20 +20,21 @@ int 		get_col(char *str)
 	num = 0;
 	j = 2;
 	if (str[0] != '0' && str[1] != 'x')
-		return (0XFFFFAA);
+		return (DCOL2);
 	while (str[j])
 	{
 		if (j == 8)
-			return (0XFFFFAA);
+			return (DCOL2);
 		if (str[j] >= '0' && str[j] <= '9')
 			num = num * 16 + (str[j] - '0');
 		else if (str[j] >= 'A' && str[j] <= 'F')
 			num = num * 16 + (str[j] - 'A' + 10);
 		else
-			return (0XFFFFAA);
+			return (DCOL2);
 		j++;
 	}
-	printf(",%X ", num);
+	if (j == 2)
+		return (DCOL2);
 	return(num);
 }
 
@@ -47,16 +48,16 @@ int			validate_coord(char *coor, t_raw *raw, size_t col, int step)
 	res = 0;
 	arr = ft_strsplit(coor, ',');
 	res = ((arr[1] && arr[2]) ? 1 : res);
-	raw->cor[raw->hight][col].z = (ft_getnbr(arr[0], &is_val)) * step / 4; // maybe not z, first row problem
+	raw->cor[raw->hight][col].z = (ft_getnbr(arr[0], &is_val)) * step / 4;
 	res = ((!is_val) ? 1 : res);
     if (res)
     {
         ft_del_2arr(&arr);
         return (res);
     }
-	raw->cor[raw->hight][col].y = (int)raw->hight * step;// + WINH / 20;
-	raw->cor[raw->hight][col].x = (int)col * step;// + WINW / 20;
-	raw->cor[raw->hight][col].col = 0XFFFFFF;
+	raw->cor[raw->hight][col].y = (int)raw->hight * step;
+	raw->cor[raw->hight][col].x = (int)col * step;
+	raw->cor[raw->hight][col].col = raw->clr;
 	if (arr[1])
 		raw->cor[raw->hight][col].col = get_col(arr[1]);
 	ft_del_2arr(&arr);
@@ -101,7 +102,7 @@ int		read_map(t_raw *raw, int fd)
 	if (!get_next_line(fd, &line))
 		return (1);
 	raw->width = (size_t)ft_w_c(line, ' ');
-	step = (raw->width > 1) ? (IMGW / (raw->width - 1)) : IMGW; // think about that
+	step = (raw->width > 1) ? (IMGW / (raw->width - 1)) : IMGW;
 	printf("%d\n", step);//test
 	if (parse_line(line, raw, step))
 	{
