@@ -35,6 +35,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdint.h>
 # include "libft.h"
 
 # define FLAG_SKIP(x) (x == ',' || x == ':' || x == ';' || x == '_')

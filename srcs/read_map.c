@@ -14,11 +14,27 @@
 
 int 		get_col(char *str)
 {
-	int		col;
+	int     j;
+	int     num;
 
-	str = NULL;
-	col = 0XFFFFAA;
-	return(col);
+	num = 0;
+	j = 2;
+	if (str[0] != '0' && str[1] != 'x')
+		return (0XFFFFAA);
+	while (str[j])
+	{
+		if (j == 8)
+			return (0XFFFFAA);
+		if (str[j] >= '0' && str[j] <= '9')
+			num = num * 16 + (str[j] - '0');
+		else if (str[j] >= 'A' && str[j] <= 'F')
+			num = num * 16 + (str[j] - 'A' + 10);
+		else
+			return (0XFFFFAA);
+		j++;
+	}
+	printf(",%X ", num);
+	return(num);
 }
 
 int			validate_coord(char *coor, t_raw *raw, size_t col, int step)
@@ -42,7 +58,7 @@ int			validate_coord(char *coor, t_raw *raw, size_t col, int step)
 	raw->cor[raw->hight][col].x = (int)col * step;// + WINW / 20;
 	raw->cor[raw->hight][col].col = 0XFFFFFF;
 	if (arr[1])
-		raw->cor[raw->hight][col].col = 0XFFFF02;
+		raw->cor[raw->hight][col].col = get_col(arr[1]);
 	ft_del_2arr(&arr);
 	printf("%.0f ", raw->cor[raw->hight][col].z); // test
 	return (res);

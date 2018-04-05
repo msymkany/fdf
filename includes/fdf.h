@@ -39,7 +39,7 @@
 ** All the functions defined in the miniLibX library.
 */
 
-typedef double	t_vector __attribute__((vector_size(sizeof(double)*3)));
+//typedef double	t_vector __attribute__((vector_size(sizeof(double)*3)));
 typedef struct s_coord	t_coord;
 typedef struct s_cor	t_cor;
 typedef struct s_raw	t_raw;
