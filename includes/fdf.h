@@ -92,6 +92,8 @@ typedef struct 		s_gen
 	int 			bpp;
 	int 			len;
 	int 			en;
+	int				j;
+	int 			r_m;
 }					t_gen;
 
 
@@ -102,5 +104,7 @@ int 		key_hook(int key_code, t_gen *gen);
 int         to_exit_x(t_gen *gen);
 void	    draw_it_all(t_gen *gen);
 void		put_pixel_to_image(t_gen *gen, int x, int y, int color);
+int 		move_it(int key, t_gen *gen);
+
 
 #endif

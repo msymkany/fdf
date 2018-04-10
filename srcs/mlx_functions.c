@@ -65,3 +65,17 @@ int 	key_hook(int key_code, t_gen *gen)
 	}
 	return (0);
 }
+
+int 	move_it(int key, t_gen *gen)
+{
+//	printf("move_it");
+	if (key == 124)
+	{
+		mlx_clear_window(gen->ptr, gen->wnd);
+		mlx_string_put(gen->ptr, gen->wnd, (gen->j)++, 2,  0XFFFFFF, "->");
+
+	}
+//	if (key_code == 123)
+//		mlx_string_put(gen->ptr, gen->wnd, 20, j++, 0XFFFFFF, "<-");
+	return (0);
+}
