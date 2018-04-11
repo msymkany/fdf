@@ -25,6 +25,7 @@ SRCS = fdf.c \
         ft_usage.c \
         mlx_functions.c \
         calculate_map.c \
+        move_it.c \
 
 OBJ = $(SRCS:.c=.o)
 
