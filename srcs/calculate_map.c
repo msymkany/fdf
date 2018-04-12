@@ -14,10 +14,10 @@
 
 t_cor 	to_izo(t_coord cor, t_cor st)
 {
-	st.x = (cor.x - cor.z)/ sqrt(2);
-	st.y = (cor.x + cor.z + cor.y * 2) / sqrt(6);
-//	st.x = cor.x;
-//	st.y = cor.y;
+//	st.x = (cor.x - cor.z)/ sqrt(2);
+//	st.y = (cor.x + cor.z + cor.y * 2) / sqrt(6);
+	st.x = cor.x;
+	st.y = cor.y;
 	st.col = cor.col;
 	return (st);
 }

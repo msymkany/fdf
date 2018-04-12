@@ -104,6 +104,9 @@ typedef struct 		s_gen
 	int 			en;
 	int				j;
 	int				move;
+	int 			z_ang;
+	int 			x_ang;
+	int 			y_ang;
 }					t_gen;
 
 
@@ -116,6 +119,8 @@ void	    draw_it_all(t_gen *gen);
 void		put_pixel_to_image(t_gen *gen, int x, int y, int color);
 int 		move_map(int key, t_gen *gen);
 void		move_it(t_gen *gen, int x, int y);
-void		rotate_z(t_gen *gen, int an);
+void		rotate_z(t_gen *gen, float an);
+void		rotate_x(t_gen *gen, float an);
+void		rotate_y(t_gen *gen, float an);
 
 #endif

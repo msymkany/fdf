@@ -34,15 +34,6 @@ void		put_pixel_to_image(t_gen *gen, int x, int y, int color)
 
 void	draw_image(t_gen *gen)
 {
-
-//	gen->bpp = 0;
-//	gen->len = 0;
-//	gen->en = 0;
-//	ft_printf("bpp: %d\n", gen->bpp); //test
-//	ft_printf("len: %d\n", gen->len); //test
-//	ft_printf("end: %d\n", gen->en); //test
-//	mlx_clear_window(gen->ptr, gen->wnd);
-//	ft_bzero(gen->img_str, sizeof(gen->img_str));
 	mlx_destroy_image(gen->ptr, gen->img);
 	gen->img = mlx_new_image(gen->ptr, WINW, WINH);
 	gen->img_str = mlx_get_data_addr(gen->img, &gen->bpp, &gen->len, &gen->en);
@@ -52,7 +43,7 @@ void	draw_image(t_gen *gen)
 
 int 	key_hook(int key_code, t_gen *gen)
 {
-	ft_printf("key hook\n"); //test
+	printf("key hook\n"); //test
 	if (key_code == 53)
 	{
 //		mlx_string_put(gen->ptr, gen->wnd, 10, 10, 0X00FFFFFF, "Fuck off");
@@ -70,21 +61,28 @@ int 	key_hook(int key_code, t_gen *gen)
 
 int 	move_map(int key, t_gen *gen)
 {
-//	printf("move_it");
 	if (key == 124)
-	{
 		move_it(gen, 3, 0);
-	}
 	else if (key == 123)
 		move_it(gen, -3, 0);
 	else if (key == 126)
 		move_it(gen, 0, -3);
 	else if (key == 125)
 		move_it(gen, 0, 3);
-	else if (key == 50)
-		rotate_z(gen, 10);
-//		mlx_clear_window(gen->ptr, gen->wnd);
+	else if (key == 6) //z
+	{
+		rotate_z(gen, 0.02);
+	}
+	else if (key == 7)//x
+		rotate_z(gen, -0.02);
+	else if (key == 0) //a
+		rotate_x(gen, 0.02);
+	else if (key == 1) //a
+		rotate_x(gen, -0.02);
+	else if (key == 12) //q
+		rotate_y(gen, 0.02);
+	else if (key == 13) //w
+		rotate_y(gen, -0.02);
 	draw_image(gen);
-//		mlx_string_put(gen->ptr, gen->wnd, 20, j++, 0XFFFFFF, "<-");
 	return (0);
 }
