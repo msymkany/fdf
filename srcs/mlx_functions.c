@@ -12,18 +12,18 @@
 
 #include "../includes/fdf.h"
 
-int     to_exit_x(t_gen *gen)
+int		to_exit_x(t_gen *gen)
 {
-    ft_strdel(&gen->img_str);
-    system("leaks fdf");
-    exit(1);
-    return (0);
+	ft_strdel(&gen->img_str);
+	system("leaks fdf");
+	exit(1);
+	return (0);
 }
 
-void		put_pixel_to_image(t_gen *gen, int x, int y, int color)
+void	put_pixel_to_image(t_gen *gen, int x, int y, int color)
 {
 	unsigned int	c;
-	int 			j;
+	int				j;
 
 	c = mlx_get_color_value(gen->ptr, color);
 	j = y * gen->len + x * gen->bpp / 8;
@@ -41,27 +41,13 @@ void	draw_image(t_gen *gen)
 	mlx_put_image_to_window(gen->ptr, gen->wnd, gen->img, 0, 0);
 }
 
-int 	key_hook(int key_code, t_gen *gen)
+int		move_map(int key, t_gen *gen)
 {
-	printf("key hook\n"); //test
-	if (key_code == 53)
-	{
-//		mlx_string_put(gen->ptr, gen->wnd, 10, 10, 0X00FFFFFF, "Fuck off");
-//		sleep(10);
-        ft_strdel(&gen->img_str);
-        system("leaks fdf");
+	if (key == 53)
 		exit(0);
-	}
-	else if (key_code == 36)
-	{
+	else if (key == 36)
 		draw_image(gen);
-	}
-	return (0);
-}
-
-int 	move_map(int key, t_gen *gen)
-{
-	if (key == 124)
+	else if (key == 124)
 		move_it(gen, 3, 0);
 	else if (key == 123)
 		move_it(gen, -3, 0);
@@ -69,20 +55,17 @@ int 	move_map(int key, t_gen *gen)
 		move_it(gen, 0, -3);
 	else if (key == 125)
 		move_it(gen, 0, 3);
-	else if (key == 6) //z
-	{
+	else if (key == 6)
 		rotate_z(gen, 0.02);
-	}
-	else if (key == 7)//x
+	else if (key == 7)
 		rotate_z(gen, -0.02);
-	else if (key == 0) //a
+	else if (key == 0)
 		rotate_x(gen, 0.02);
-	else if (key == 1) //a
+	else if (key == 1)
 		rotate_x(gen, -0.02);
-	else if (key == 12) //q
+	else if (key == 12)
 		rotate_y(gen, 0.02);
-	else if (key == 13) //w
+	else if (key == 13)
 		rotate_y(gen, -0.02);
-	draw_image(gen);
 	return (0);
 }

@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <stdio.h> //test
 # include <math.h>
 
 # define MAXMAP 1000
@@ -27,8 +26,8 @@
 # define WINW 1000
 # define MARG (WINW / 5)
 # define IMGW (WINW - MARG)
-# define DCOL 0XE3BEF7//0XFFFFFF
-# define DCOL2 0X7bb1f7 // cool red ED2323
+# define DCOL 0XE3BEF7
+# define DCOL2 0X7bb1f7
 
 /*
 ** open, read, write, close
@@ -39,7 +38,6 @@
 ** All the functions defined in the miniLibX library.
 */
 
-//typedef double	t_vector __attribute__((vector_size(sizeof(double)*3)));
 typedef struct s_coord	t_coord;
 typedef struct s_cor	t_cor;
 typedef struct s_raw	t_raw;
@@ -103,17 +101,13 @@ typedef struct 		s_gen
 	int 			len;
 	int 			en;
 	int				j;
-	int				move;
-	int 			z_ang;
-	int 			x_ang;
-	int 			y_ang;
+	int				step;
 }					t_gen;
 
 
 void		ft_usage(char *name);
 int 		get_col(char *str);
-int			read_map(t_raw *raw, int fd);
-int 		key_hook(int key_code, t_gen *gen);
+int			read_map(t_raw *raw, int fd, int step);
 int         to_exit_x(t_gen *gen);
 void	    draw_it_all(t_gen *gen);
 void		put_pixel_to_image(t_gen *gen, int x, int y, int color);
@@ -122,5 +116,6 @@ void		move_it(t_gen *gen, int x, int y);
 void		rotate_z(t_gen *gen, float an);
 void		rotate_x(t_gen *gen, float an);
 void		rotate_y(t_gen *gen, float an);
+void		draw_image(t_gen *gen);
 
 #endif

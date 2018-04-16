@@ -27,8 +27,8 @@ void	center_it(t_raw *raw)
 		j = 0;
 		while (j < raw->width)
 		{
-			raw->cor[i][j].y = raw->cor[i][j].y - y + WINH / 2;// + MARG / 2;
-			raw->cor[i][j].x = raw->cor[i][j].x - x + WINW / 2;// + MARG / 2;
+			raw->cor[i][j].y = raw->cor[i][j].y - y;
+			raw->cor[i][j].x = raw->cor[i][j].x - x;
 			j++;
 		}
 		i++;
@@ -52,7 +52,7 @@ t_gen	*validate_map(int ar, char **av, t_gen *gen)
 	gen = ft_memalloc(sizeof(t_gen));
 	gen->raw = ft_memalloc(sizeof(t_raw));
 	gen->raw->clr = (ar > 3 && ft_strequ(av[2], "-c")) ? get_col(av[3]) : DCOL;
-	if (read_map(gen->raw, fd))
+	if (read_map(gen->raw, fd, gen->step))
 	{
 		free(gen);
 		gen = NULL;
@@ -71,21 +71,23 @@ int		main(int ar, char **av)
 	gen = NULL;
 	gen = validate_map(ar, av, gen);
 	if (gen == NULL)
-	{
-		ft_printf("Error\n"); //test
 		return (1);
-	}
-	printf("gen->raw->clr %X ", gen->raw->clr); //test
-	printf("marg %d ", MARG); //test
 	gen->ptr = mlx_init();
 	gen->wnd = mlx_new_window(gen->ptr, WINW, WINH, "fdf");
 	gen->img = mlx_new_image(gen->ptr, WINW, WINH);
 	gen->img_str = mlx_get_data_addr(gen->img, &gen->bpp, &gen->len, &gen->en);
-	mlx_string_put(gen->ptr, gen->wnd, 1, 1, 16777215, "Hello"); //test
-	mlx_key_hook(gen->wnd, key_hook, gen);
+	mlx_string_put(gen->ptr, gen->wnd, 30, 30, 0xED2323, "Control keys");
+	mlx_string_put(gen->ptr, gen->wnd, 30, 50, 0xFFFFFF,
+				"Move (up, down, left, right): use arrows");
+	mlx_string_put(gen->ptr, gen->wnd, 30, 70, 0xFFFFFF, "Rotate:");
+	mlx_string_put(gen->ptr, gen->wnd, 30, 90, 0xFFFFFF, "Z       keys z, x");
+	mlx_string_put(gen->ptr, gen->wnd, 30, 110, 0xFFFFFF, "X       keys a, s");
+	mlx_string_put(gen->ptr, gen->wnd, 30, 130, 0xFFFFFF, "Y       keys q, w");
+	mlx_string_put(gen->ptr, gen->wnd, 30, 150, 0xFFFFFF,
+				"Press Enter to start");
+	mlx_string_put(gen->ptr, gen->wnd, 30, 170, 0xFFFFFF, "Press Esc to exit");
 	mlx_hook(gen->wnd, 17, 1L << 17, to_exit_x, gen);
-//	printf("move_it");
-	mlx_hook (gen->wnd, 2, 5, move_map, gen);
+	mlx_hook(gen->wnd, 2, 5, move_map, gen);
 	mlx_loop(gen->ptr);
 	return (0);
 }
