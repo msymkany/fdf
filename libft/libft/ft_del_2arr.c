@@ -15,15 +15,15 @@
 void		ft_del_2arr(char ***arr)
 {
 	size_t		i;
-	char 		**ptr;
+	char		**ptr;
 
 	ptr = *arr;
 	i = 0;
 	while (ptr[i])
-    {
-        ft_strdel(&ptr[i]);
-        i++;
-    }
+	{
+		ft_strdel(&ptr[i]);
+		i++;
+	}
 	free(ptr);
 	ptr = NULL;
 }

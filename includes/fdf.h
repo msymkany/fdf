@@ -20,10 +20,9 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
-
 # define MAXMAP 1000
-# define WINH 1000
-# define WINW 1000
+# define WINH 1200
+# define WINW 1200
 # define MARG (WINW / 5)
 # define IMGW (WINW - MARG)
 # define DCOL 0XE3BEF7
@@ -38,84 +37,73 @@
 ** All the functions defined in the miniLibX library.
 */
 
-typedef struct s_coord	t_coord;
-typedef struct s_cor	t_cor;
-typedef struct s_raw	t_raw;
-typedef struct s_gen	t_gen;
-typedef struct s_bres	t_bres;
+typedef struct s_coord		t_coord;
+typedef struct s_cor		t_cor;
+typedef struct s_raw		t_raw;
+typedef struct s_gen		t_gen;
+typedef struct s_bres		t_bres;
 
-typedef struct 		s_bres
+struct			s_bres
 {
-	int				dx;
-	int				dy;
-	int				sx;
-	int				sy;
-	int				d;
-	int				d1;
-	int				d2;
-}					t_bres;
+	int			dx;
+	int			dy;
+	int			sx;
+	int			sy;
+	int			d;
+	int			d1;
+	int			d2;
+};
 
-typedef struct 		s_cor
+struct			s_cor
 {
-	double			x;
-	double			y;
-	int 			col;
-}					t_cor;
+	double		x;
+	double		y;
+	int			col;
+};
 
-typedef struct 		s_coord
+struct			s_coord
 {
-	double			x;
-	double			y;
-	double			z;
-	int 			col;
-}					t_coord;
+	double		x;
+	double		y;
+	double		z;
+	int			col;
+};
 
-typedef struct 		s_raw
+struct			s_raw
 {
-	t_coord			cor[MAXMAP][MAXMAP];
-	size_t			hight;
-	size_t			width;
-	int 			clr;
-}					t_raw;
+	t_coord		cor[MAXMAP][MAXMAP];
+	size_t		hight;
+	size_t		width;
+	int			clr;
+};
 
-/*
-** move
-** 1 - right
-** 2 - left
-** 4 - up
-** 8 - down
-** 16 - rot z
-** 32 - rot y
-*/
-
-typedef struct 		s_gen
+struct			s_gen
 {
-	t_raw			*raw;
-    t_cor           c0;
-    t_cor           c1;
-	void			*ptr;
-	void			*wnd;
-	void			*img;
-	char			*img_str;
-	int 			bpp;
-	int 			len;
-	int 			en;
-	int				j;
-	int				step;
-}					t_gen;
+	t_raw		*raw;
+	t_cor		c0;
+	t_cor		c1;
+	void		*ptr;
+	void		*wnd;
+	void		*img;
+	char		*img_str;
+	int			bpp;
+	int			len;
+	int			en;
+	int			j;
+	int			step;
+};
 
-
-void		ft_usage(char *name);
-int 		get_col(char *str);
-int			read_map(t_raw *raw, int fd, int step);
-int         to_exit_x(t_gen *gen);
-void	    draw_it_all(t_gen *gen);
-void		put_pixel_to_image(t_gen *gen, int x, int y, int color);
-int 		move_map(int key, t_gen *gen);
-void		move_it(t_gen *gen, int x, int y);
-void		rotate_z(t_gen *gen, float an);
-void		rotate_x(t_gen *gen, float an);
-void		rotate_y(t_gen *gen, float an);
-void		draw_image(t_gen *gen);
+void			ft_usage(char *name);
+int				get_col(char *str);
+int				read_map(t_raw *raw, int fd, int step);
+int				to_exit_x(t_gen *gen);
+void			draw_it_all(t_gen *gen);
+void			put_pixel_to_image(t_gen *gen, int x, int y, int color);
+int				move_map(int key, t_gen *gen);
+void			move_it(t_gen *gen, int x, int y);
+void			rotate_z(t_gen *gen, float an);
+void			rotate_x(t_gen *gen, float an);
+void			rotate_y(t_gen *gen, float an);
+void			draw_image(t_gen *gen);
 
 #endif

@@ -41,7 +41,7 @@ void	draw_1(t_gen *gen, t_bres br)
 		}
 		else
 			br.d += br.d1;
-		if (x >= 0 && y >= 0 && x <= WINW)
+		if (x >= 0 && y >= 0 && x < WINW)
 			put_pixel_to_image(gen, x, y, gen->c0.col);
 		i++;
 		x += br.sx;
@@ -69,7 +69,7 @@ void	draw_2(t_gen *gen, t_bres br)
 		}
 		else
 			br.d += br.d1;
-		if (x >= 0 && y >= 0 && x <= WINW)
+		if (x >= 0 && y >= 0 && x < WINW)
 			put_pixel_to_image(gen, x, y, gen->c0.col);
 		i++;
 		y += br.sy;
@@ -84,7 +84,7 @@ void	bresenham(t_gen *gen)
 	br.dy = fabs(gen->c1.y - gen->c0.y);
 	br.sx = gen->c1.x >= gen->c0.x ? 1 : -1;
 	br.sy = gen->c1.y >= gen->c0.y ? 1 : -1;
-	if (gen->c0.x >= 0 && gen->c0.y >= 0 && gen->c0.x <= WINW)
+	if (gen->c0.x >= 0 && gen->c0.y >= 0 && gen->c0.x < WINW)
 		put_pixel_to_image(gen, gen->c0.x, gen->c0.y, gen->c0.col);
 	if (br.dy <= br.dx)
 	{

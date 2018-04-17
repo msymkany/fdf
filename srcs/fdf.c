@@ -64,18 +64,8 @@ t_gen	*validate_map(int ar, char **av, t_gen *gen)
 	return (gen);
 }
 
-int		main(int ar, char **av)
+void	set_up(t_gen *gen)
 {
-	t_gen	*gen;
-
-	gen = NULL;
-	gen = validate_map(ar, av, gen);
-	if (gen == NULL)
-		return (1);
-	gen->ptr = mlx_init();
-	gen->wnd = mlx_new_window(gen->ptr, WINW, WINH, "fdf");
-	gen->img = mlx_new_image(gen->ptr, WINW, WINH);
-	gen->img_str = mlx_get_data_addr(gen->img, &gen->bpp, &gen->len, &gen->en);
 	mlx_string_put(gen->ptr, gen->wnd, 30, 30, 0xED2323, "Control keys");
 	mlx_string_put(gen->ptr, gen->wnd, 30, 50, 0xFFFFFF,
 				"Move (up, down, left, right): use arrows");
@@ -87,6 +77,21 @@ int		main(int ar, char **av)
 				"Press Enter to start");
 	mlx_string_put(gen->ptr, gen->wnd, 30, 170, 0xFFFFFF, "Press Esc to exit");
 	mlx_hook(gen->wnd, 17, 1L << 17, to_exit_x, gen);
+}
+
+int		main(int ar, char **av)
+{
+	t_gen	*gen;
+
+	gen = NULL;
+	gen = validate_map(ar, av, gen);
+	if (gen == NULL)
+		return (1);
+	gen->ptr = mlx_init();
+	gen->wnd = mlx_new_window(gen->ptr, WINW, WINH, "fdf");
+	gen->img = mlx_new_image(gen->ptr, WINW, WINH);
+	set_up(gen);
+	gen->img_str = mlx_get_data_addr(gen->img, &gen->bpp, &gen->len, &gen->en);
 	mlx_hook(gen->wnd, 2, 5, move_map, gen);
 	mlx_loop(gen->ptr);
 	return (0);

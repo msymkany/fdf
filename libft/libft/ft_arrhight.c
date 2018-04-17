@@ -17,7 +17,7 @@ size_t		ft_arrhight(char **arr)
 	size_t	j;
 
 	j = 0;
-	while(arr[j])
+	while (arr[j])
 		j++;
 	return (j);
 }

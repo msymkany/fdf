@@ -15,7 +15,6 @@
 int		to_exit_x(t_gen *gen)
 {
 	ft_strdel(&gen->img_str);
-	system("leaks fdf");
 	exit(1);
 	return (0);
 }
@@ -41,12 +40,19 @@ void	draw_image(t_gen *gen)
 	mlx_put_image_to_window(gen->ptr, gen->wnd, gen->img, 0, 0);
 }
 
+void	draw_frst_image(t_gen *gen)
+{
+	gen->img_str = mlx_get_data_addr(gen->img, &gen->bpp, &gen->len, &gen->en);
+	rotate_x(gen, -0.7);
+	rotate_y(gen, -0.4);
+}
+
 int		move_map(int key, t_gen *gen)
 {
 	if (key == 53)
 		exit(0);
 	else if (key == 36)
-		draw_image(gen);
+		draw_frst_image(gen);
 	else if (key == 124)
 		move_it(gen, 3, 0);
 	else if (key == 123)
